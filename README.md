@@ -10,6 +10,7 @@
 
 ```diff
 + UPDATE: Added my huge link of bookmarks / references ❤️  
++ UPDATE: Added PDF generation tool - Convert all cheatsheets to PDF format! 📄
 
 ```
 *Do you have a million bookmarks saved? Do all of those bookmarks contain unique information? Github repos starred for later?*
@@ -17,7 +18,22 @@
 
 Well this is a compilation of all of these resources into a single repo known as **Cheatsheet-God**. No more need for bookmarked links. No need to open a web browser. Its all here for you.
 
-This is a collection of resources, scripts and easy to follow how-to's. I have been gathering (and continuing to gather) in preparation for the OSCP as well as for general pentesting. Feel free to use however you want! 
+This is a collection of resources, scripts and easy to follow how-to's. I have been gathering (and continuing to gather) in preparation for the OSCP as well as for general pentesting. Feel free to use however you want!
+
+## 📄 PDF Generation
+
+All cheatsheets are now available in PDF format! You can also regenerate PDFs from the text files using the included Python script.
+
+**Quick Start:**
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Generate all PDFs
+python3 generate_pdf.py
+```
+
+For more details, see [PDF_GENERATION.md](PDF_GENERATION.md) 
 
 
 
