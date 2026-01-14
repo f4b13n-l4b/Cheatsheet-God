@@ -29,9 +29,9 @@ def generate_pdf_from_text(text_file, output_file=None):
     
     # Read the text file
     try:
-        with open(text_file, 'r', encoding='utf-8', errors='ignore') as f:
+        with open(text_file, 'r', encoding='utf-8', errors='replace') as f:
             content = f.read()
-    except Exception as e:
+    except (IOError, OSError) as e:
         print(f"Error reading {text_file}: {e}")
         return False
     
@@ -87,11 +87,12 @@ def generate_pdf_from_text(text_file, output_file=None):
                     try:
                         pre = Preformatted(block_text, code_style)
                         elements.append(pre)
-                    except Exception as e:
+                    except (UnicodeDecodeError, UnicodeEncodeError, ValueError) as e:
                         # If preformatted fails, try as regular paragraph
                         try:
                             elements.append(Paragraph(block_text.replace('\n', '<br/>'), styles['Normal']))
-                        except:
+                        except (UnicodeDecodeError, UnicodeEncodeError, ValueError):
+                            # Skip blocks that can't be rendered
                             pass
                     current_block = []
                 elements.append(Spacer(1, 0.1*inch))
@@ -102,10 +103,11 @@ def generate_pdf_from_text(text_file, output_file=None):
             try:
                 pre = Preformatted(block_text, code_style)
                 elements.append(pre)
-            except Exception as e:
+            except (UnicodeDecodeError, UnicodeEncodeError, ValueError) as e:
                 try:
                     elements.append(Paragraph(block_text.replace('\n', '<br/>'), styles['Normal']))
-                except:
+                except (UnicodeDecodeError, UnicodeEncodeError, ValueError):
+                    # Skip blocks that can't be rendered
                     pass
         
         # Build PDF
